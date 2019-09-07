@@ -16,6 +16,24 @@
     },
     "material": {
       "tags": []
+    },
+    "libs-material": {
+      "tags": []
+    },
+    "core-data-core-data": {
+      "tags": []
+    },
+    "ui-login-ui-login": {
+      "tags": []
+    },
+    "core-data": {
+      "tags": []
+    },
+    "ui-login": {
+      "tags": []
+    },
+    "ui-toolbar": {
+      "tags": []
     }
   }
 }
