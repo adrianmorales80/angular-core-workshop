@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'dashboard';
+  /* String interpolation used with the variable to render in html */
+  title = 'Angular Core Workshop';
 }

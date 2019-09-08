@@ -1,5 +1,12 @@
 <div class="container">
   <!-- PROJECTS LIST -->
+  <!-- Protips:
+       1. Event binding uses (), just like you would use () to invoke a function
+       2. If you were accessing a property of an html collection, you would use [] or bracket notation, and so you do the same with property binding
+       3. Handle bars uses {{ variable here }} to render text, as does string interpolation
+       4. Local reference variable uses #, just like social media does to start a reference collection
+       5. decorators use an @
+       6. structural directives use *-->
   <div class="col-50">
     <mat-card>
       <mat-card-header>
@@ -8,13 +15,17 @@
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
+          <!-- Protip: You can render the object itself using the syntax below. Vertical pipe is the same usage as grep -->
+          <!-- <pre>{{projects | json}}</pre> -->
         <mat-list>
-          <mat-list-item>
-            <h3 mat-line>
-              <!-- PROJECT DETAILS -->
+          <mat-list-item (click)="selectProject(project)"
+            *ngFor="let project of projects">
+            <!-- Example of property binding -->
+            <h3 mat-line [style.color]="primaryColor">
+              {{ project.title }}
             </h3>
             <p mat-line>
-              <!-- PROJECT DETAILS -->
+              {{ project.details }}
             </p>
             <button mat-icon-button>
               <mat-icon>close</mat-icon>
@@ -30,17 +41,27 @@
       <mat-card-header>
         <mat-card-title>
           <h1>
-            <!-- PROJECT TITLE HERE -->
+            <!-- safe navigation operator option -->
+            <!-- {{  selectedProject?.title }} -->
+
+            <!-- Instead of safe navigation above, we can have two ng ifs -->
+            <!-- <span *ngIf="selectedProject">{{ selectedProject.title }}</span>
+            <span *ngIf="!selectedProject"> Select A Project </span> -->
+
+            <!-- An even cleaner option is to use ng-template with a local template variable -->
+            <span *ngIf="selectedProject; else elseBlock">{{ selectedProject.title }}</span>
+            <ng-template #elseBlock>Select A Project</ng-template>
           </h1>
         </mat-card-title>
       </mat-card-header>
       <form>
         <mat-card-content>
-          <!-- PROJECT FORM HERE -->
+            <pre>{{ selectedProject | json}}</pre>
         </mat-card-content>
         <mat-card-actions>
           <button type="submit" mat-button color="primary">Save</button>
-          <button type="button" mat-button>Cancel</button>
+          <!-- Invoke the cancel function on click of cancel button that passes null  -->
+          <button type="button" mat-button (click)="cancel()">Cancel</button>
         </mat-card-actions>
       </form>
     </mat-card>
