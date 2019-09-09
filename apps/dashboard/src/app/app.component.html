@@ -2,10 +2,10 @@
   <span>
     <!-- cmd+click on sidenave to see that is references #sidenav.
       Do the same with toggle(), to see it comes from material -->
-    <!-- Another option instead, is to pass in the local reference variable into a function. 
+    <!-- Another option instead, is to pass in the local reference variable into a function.
          You will need the function in the ts file of course -->
     <!-- Yet another option is to do the following the ts file:
-            @Viewchild('sidenav') localSideNav 
+            @Viewchild('sidenav') localSideNav
             toggle() {this.localSideNav.toggle}
          In this example, @Viewchild is a decorator, or function that queries the DOM of the component
          for sidenav local ref variable and then stores it in localSideNav for access-->
@@ -26,18 +26,39 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
+  <!--
+       * Adding Navigation Links
+   * The links variable in app.component.ts is used in the html app.component.html template to:
+   * 1. loop over them with ngFor (structural directive)
+   * 2. render the text with string interpolation
+   * 3. property bind to routerLink
+   * 4. Assign active when clicked
+   * 5. lazy loading is brought into the html template thanks to the router-outlet tag
+   * Additional notes: Look into using children at the child level to bring in a subcomponent under home, for example
+   -->
   <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
     <nav>
-      <a mat-button class="nav-link">
+      <a mat-button class="nav-link"
+         *ngFor="let link of links"
+         [routerLink]="link.path"
+         routerlinkActive="active">
         <mat-icon>
-        <!-- LINK ICON -->
+        {{ link.icon }}
         </mat-icon>
-        <!-- LINK LABEL -->
+        {{ link.title }}
       </a>
     </nav>
   </mat-sidenav>
 
   <div class="app-content">
+    <!-- No need to render:
+
     <app-projects></app-projects>
+
+    because our routing is going to take place
+    -->
+
+    <!-- routing-outlet is brings in login works! from app-routing.module.ts -->
+    <router-outlet></router-outlet>
   </div>
 </mat-sidenav-container>
